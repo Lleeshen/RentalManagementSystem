@@ -72,12 +72,41 @@ if(empty($_POST)) {
         <h3> Branch </h3>
 <?php
     //Display Branch table
+    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+    if(!$conn) {
+        $e = oci_error;
+        echo 'Connection failed';
+        echo htmlentities($e['message']);
+    }
+    $sql = "select * from Brach";
+    $query = oci_parse($conn,$sql);
+    $num_col = oci_num_fields($query);
+
+    echo '<table border=1>';
+    echo '<tr>';
+    for($i = 1; $i <= $num_col; $i++) {
+        $col_name = oci_field_name($query,$i);
+        echo "<th> $col_name </th>";
+    }
+    echo '</tr>';
+    while(oci_fetch($query)) {
+        echo '<tr>';
+        for($i=1;$i <= $num_col; $i++) {
+            $col_value = oci_result($query,$i);
+            echo "<td>$col_value</td>";
+        }
+        echo '</tr>';
+    }
+    echo '</table>';
+    oci_free_statement($query);
+    oci_close($conn);
 ?>
     </div>
     <div id="ifT2" class="noDisplay">
         <h3> Manager </h3> 
 <?php
     //Display Manager table
+   
 ?>
     </div>
     <div id="ifT3" class="noDisplay">
