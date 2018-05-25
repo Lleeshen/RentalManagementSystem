@@ -74,11 +74,11 @@ if(empty($_POST)) {
     //Display Branch table
     $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
-        $e = oci_error;
+        $e = oci_error();
         echo 'Connection failed';
         echo htmlentities($e['message']);
     }
-    $sql = "select * from Brach";
+    $sql = "select * from Branch";
     $query = oci_parse($conn,$sql);
     $num_col = oci_num_fields($query);
 
@@ -106,25 +106,139 @@ if(empty($_POST)) {
         <h3> Manager </h3> 
 <?php
     //Display Manager table
-   
+    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+    if(!$conn) {
+        $e = oci_error();
+        echo 'Connection failed';
+        echo htmlentities($e['message']);
+    }   
+    $sql = "select * from Manager";
+    $query = oci_parse($conn,$sql);
+    $num_col = oci_num_fields($query);
+            
+    echo '<table border=1>';
+    echo '<tr>';
+    for($i = 1; $i <= $num_col; $i++) {
+        $col_name = oci_field_name($query,$i);
+        echo "<th> $col_name </th>";
+    }   
+    echo '</tr>';
+    while(oci_fetch($query)) {
+        echo '<tr>';
+        for($i=1;$i <= $num_col; $i++) {
+            $col_value = oci_result($query,$i);
+            echo "<td>$col_value</td>";
+        }   
+        echo '</tr>';
+    }   
+    echo '</table>';
+    oci_free_statement($query);
+    oci_close($conn);
+
 ?>
     </div>
     <div id="ifT3" class="noDisplay">
         <h3> Supervisor </h3>
 <?php
     //Display Supervisor table
+    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+    if(!$conn) {
+        $e = oci_error();
+        echo 'Connection failed';
+        echo htmlentities($e['message']);
+    }   
+    $sql = "select * from Supervisor";
+    $query = oci_parse($conn,$sql);
+    $num_col = oci_num_fields($query);
+                                
+    echo '<table border=1>';
+    echo '<tr>';
+    for($i = 1; $i <= $num_col; $i++) {
+        $col_name = oci_field_name($query,$i);
+        echo "<th> $col_name </th>";
+    }   
+    echo '</tr>';
+    while(oci_fetch($query)) {
+        echo '<tr>';
+        for($i=1;$i <= $num_col; $i++) {
+            $col_value = oci_result($query,$i);
+            echo "<td>$col_value</td>";
+        }   
+        echo '</tr>';
+    }   
+    echo '</table>';
+    oci_free_statement($query);
+    oci_close($conn);
+
 ?>
     </div>
     <div id="ifT4" class="noDisplay">
         <h3> Rental Property </h3>
 <?php
     //Dispaly Rental Property table
+    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+    if(!$conn) {
+        $e = oci_error();
+        echo 'Connection failed';
+        echo htmlentities($e['message']);
+    }   
+    $sql = "select * from RentalProperty";
+    /query = oci_parse($conn,$sql);
+    $num_col = oci_num_fields($query);
+                                                    
+    echo '<table border=1>';
+    echo '<tr>';
+    for($i = 1; $i <= $num_col; $i++) {
+        $col_name = oci_field_name($query,$i);
+        echo "<th> $col_name </th>";
+    }   
+    echo '</tr>';
+    while(oci_fetch($query)) {
+        echo '<tr>';
+        for($i=1;$i <= $num_col; $i++) {
+            $col_value = oci_result($query,$i);
+            echo "<td>$col_value</td>";
+        }   
+        echo '</tr>';
+    }   
+    echo '</table>';
+    oci_free_statement($query);
+    oci_close($conn);
+
 ?>
     </div>
     <div id="ifT5" class="noDisplay">
         <h3> Lease Agreement </h3>
 <?php
     //Display Lease Agreement table
+    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+    if(!$conn) {
+        $e = oci_error();
+        echo 'Connection failed';
+        echo htmlentities($e['message']);
+    }   
+    $sql = "select * from LeaseAgreement";
+    $query = oci_parse($conn,$sql);
+    $num_col = oci_num_fields($query);
+
+    echo '<table border=1>';
+    echo '<tr>';
+    for($i = 1; $i <= $num_col; $i++) {
+        $col_name = oci_field_name($query,$i);
+        echo "<th> $col_name </th>";
+    }   
+    echo '</tr>';
+    while(oci_fetch($query)) {
+        echo '<tr>';
+        for($i=1;$i <= $num_col; $i++) {
+            $col_value = oci_result($query,$i);
+            echo "<td>$col_value</td>";
+        }   
+        echo '</tr>';
+    }   
+    echo '</table>';
+    oci_free_statement($query);
+    oci_close($conn);
 ?>
     </div>
 </body>
