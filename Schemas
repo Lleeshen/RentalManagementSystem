@@ -1,0 +1,73 @@
+Schemas for Happy Renter’s Rental Management System
+
+
+Branch (branchid PRIMARY KEY, 
+
+
+  phone, address);
+
+
+Employee (empid PRIMARY KEY, 
+
+
+  name, phone, job_designation);
+	
+  
+  Employee is the superclass of: 
+		
+    
+    Manager(empid, branchid
+
+
+      Foreign key (empid) references Employee(empid),
+      
+      
+      Foreign key (branchid) references Branch(branchid));
+		
+    
+    Supervisor(empid,
+
+
+      Foreign key (empid) references Employee(empid));
+
+
+Property_Owner (name, permanent_address, phone);
+
+
+Rental_Property (rental_num, status, address, num_of_rooms, month_rent, date_of_availability, 
+
+
+      phone, empid,
+
+
+Foreign key (phone) references Property_Owner (phone));
+
+
+Lease Agreement (rental_num, start_lease_date, renter_name, home_phone, work_phone, 
+
+
+      deposit_amt, rent_amt, supervisor_name, 
+
+
+      Foreign Key (rental_num) references Rental_Property (rental_num));
+
+
+Relationship definitions:
+	
+  
+Branch and Manager have a one to one relationship
+
+
+Supervisor and Rental_Property have a one to many relationship
+
+
+So, primary key of Supervisor(empid) is attribute in Rental_Property
+
+
+Rental_Property and Property_Owner have a many to one relationship
+
+
+So, primary key of Property_owner (phone) is an attribute in Rental_Property
+
+
+Lease_Agreement is a weak entity dependent on Rental_Property
