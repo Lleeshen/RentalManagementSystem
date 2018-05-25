@@ -1,0 +1,88 @@
+<html>
+<head>
+<script type="text/javascript">
+
+function TableCheck() {
+    document.getElementById("ifT1").style.display = 'none';
+    document.getElementById("ifT2").style.display = 'none';
+    document.getElementById("ifT3").style.display = 'none';
+    document.getElementById("ifT4").style.display = 'none';
+    document.getElementById("ifT5").style.display = 'none';
+    if(document.getElementById("t1").selected) {
+        console.log("t1 selected");
+        document.getElementById("ifT1").style.display = 'block';
+    } else if(document.getElementById("t2").selected) {
+        console.log("t2 selected");
+        document.getElementById("ifT2").style.display = 'block';
+    } else if(document.getElementById("t3").selected) {
+        console.log("t3 selected");
+        document.getElementById("ifT3").style.display = 'block';
+    } else if(document.getElementById("t4").selected) {
+        console.log("t4 selected");
+        document.getElementById("ifT4").style.display = 'block';
+    } else if(document.getElementById("t5").selected) {
+        console.log("t5 selected");
+        document.getElementById("ifT5").style.display = 'block';
+    }
+}
+
+function disableEmptyInputs(form) {
+    var controls = form.elements;
+    for (var i=0, iLen=controls.length; i<iLen; i++) {
+        controls[i].disabled = (controls[i].value == '');
+    }
+}
+
+</script>
+</head>
+<body>
+
+    <h2>Insert Rental Property Data</h2>
+    <p>Choose table to insert to. The options are Branch, Manager, Supervisor, Rental Property, and Lease Agreement.</p>
+
+    <form method="post" onchange="TableCheck();" onsubmit="disableEmptyInputs(this);">
+        <select name="tables">
+            <option value="Branch" name="branch" id="t1">Branch</option>
+            <option value="Manager" name="manager" id="t2">Manager</option>
+            <option value="Supervisor" name="supervisor" id="t3">Supervisor</option>
+            <option value="RentalProperty" name="property" id="t4">Rental Property</option>
+            <option value="LeaseAgreement" name="agreement" id="t5">Lease Agreement</option>
+        </select>                          
+    </form>
+    <div id="ifT1">
+        <h3> Branch form </h3>
+        <form method="post" action="..">
+            <input type="hidden" name="Branch" value=" "/>
+            <button type="submit"> Submit! </button>
+        </form>
+    </div>
+    <div id="ifT2" style="display:none">
+        <h3> Manager form </h3>
+        <form method="post" action="..">
+            <input type="hidden" name="Manager" value=" "/>
+            <button type="submit"> Submit! </button>
+        </form>
+    </div>
+    <div id="ifT3" style="display:none">
+        <h3> Supervisor form </h3>
+        <form method="post" action="..">
+            <input type="hidden" name="Supervisor" value=" "/>
+            <button type="submit"> Submit! </button>
+        </form>
+    </div>
+    <div id="ifT4" style="display:none">
+        <h3> Rental Property Form </h3>
+        <form method="post" action="../View">
+            <input type="hidden" name="Property" value=" "/>
+            <button type="submit"> Submit! </button>
+        </form>
+    </div>
+    <div id="ifT5" style="display:none">
+        <h3> Lease Agreement Form </h3>
+        <form method="post" action="../View">
+            <input type="hidden" name="Agreement" value=" "/>
+            <button type="submit"> Submit! </button>
+        </form>
+    </div>
+</body>
+</html>
