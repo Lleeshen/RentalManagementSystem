@@ -72,7 +72,7 @@ if(empty($_POST)) {
         <h3> Branch </h3>
 <?php
     //Display Branch table
-    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
         $e = oci_error();
         echo 'Connection failed';
@@ -106,7 +106,7 @@ if(empty($_POST)) {
         <h3> Manager </h3> 
 <?php
     //Display Manager table
-    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+    $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
         $e = oci_error();
         echo 'Connection failed';
@@ -141,7 +141,7 @@ if(empty($_POST)) {
         <h3> Supervisor </h3>
 <?php
     //Display Supervisor table
-    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+    $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
         $e = oci_error();
         echo 'Connection failed';
@@ -176,14 +176,14 @@ if(empty($_POST)) {
         <h3> Rental Property </h3>
 <?php
     //Dispaly Rental Property table
-    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+    $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
         $e = oci_error();
         echo 'Connection failed';
         echo htmlentities($e['message']);
     }   
     $sql = "select * from RentalProperty";
-    /query = oci_parse($conn,$sql);
+    $query = oci_parse($conn,$sql);
     $num_col = oci_num_fields($query);
                                                     
     echo '<table border=1>';
@@ -211,7 +211,7 @@ if(empty($_POST)) {
         <h3> Lease Agreement </h3>
 <?php
     //Display Lease Agreement table
-    $conn=oci_connect('usrname','password','//dbserver.engr.scu.edu/db11g');
+    $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
     if(!$conn) {
         $e = oci_error();
         echo 'Connection failed';
