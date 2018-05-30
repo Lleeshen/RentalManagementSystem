@@ -66,9 +66,9 @@ CREATE TABLE Renter (
 renter_work_phone, deposit_amt, rent_amt, supervisor_name) */
 CREATE TABLE Lease_Agreement (
     rental_num INTEGER,
+    renter_wphone VARCHAR(15),
     start_date DATE,
     end_date DATE,
-    renter_wphone VARCHAR(15),
     deposit_amt NUMERIC(5,2),
     rent_amt NUMERIC(5,2),
     sup_name VARCHAR(10),
