@@ -1,15 +1,3 @@
-<?php
-$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
-if(!$conn) {
-        $e = oci_error();
-        print "<br> connection failed:";
-        print htmlentities($e['message']);
-        exit;
-}
-//If renter/owner/leaseAgreement submited through form, insert appropiate one
-// Log off
-oci_close($conn);
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -43,7 +31,7 @@ oci_close($conn);
                     <!-- Will need links to forms to insert only those things -->
                     <a class="dropdown-item" href="#">Get registered as property owner</a>
                     <a class="dropdown-item" href="#">Get registered as renter</a>
-                    <a class="dropdown-item" href="#">Make a lease agreement</a>
+                    <a class="dropdown-item" href="InsertLeaseAgreement">Make a lease agreement</a>
                 </div>
             </div>
             <br /> 
