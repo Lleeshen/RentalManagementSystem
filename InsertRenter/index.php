@@ -38,29 +38,31 @@
     </div>
     <br />
     <div class="container">
+    <p>
     <?php
-        $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
-        if(!$conn) {
-            $e = oci_error;
-            print "<br> connection failed:";
-            print htmlentities($e['message']);
-            exit;
-        )
         if(!empty($_POST)) {
             $name = $_POST['name'];
             $workPhone = $_POST['wPhone'];
             $homePhone = $_POST['hPhone'];
-            $sql = "INSERT INTO VALUES (:name, :wNum, :hNum)";
+            $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
+            if(!$conn) {
+                $e = oci_error;
+                print "<br> connection failed:";
+                print htmlentities($e['message']);
+                exit;
+            }
+            $sql = "INSERT INTO Renter VALUES (:name, :wNum, :hNum)";
             $query = oci_parse($conn, $sql);
             oci_bind_by_name($query, ':name', $name);
             oci_bind_by_name($query, ':wNum', $workPhone);
             oci_bind_by_name($query, ':hNum', $homePhone);
             if(oci_execute($query)) {
-                echo "Lease Agreement Successfully Created.";
+                echo "Successfully Registered as Renter.";
             }
         }
         //Insert if received input, display message if successful
     ?>
+    </p>
     </div>
     <br />
     <div class="jumbotron jumbotron-fluid">
