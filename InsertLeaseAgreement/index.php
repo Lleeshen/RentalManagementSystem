@@ -56,33 +56,33 @@
     <br />
     <div class="container">
     <?php
-        $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
-        if(!$conn) {
-            $e = oci_error;
-            print "<br> connection failed:";
-            print htmlentities($e['message']);
-            exit;
-        )
         if(!empty($_POST)) {
             $rentalNum = $_POST['rentNum'];
             $RenterPhone = $_POST['renterPhone'];
             /*
              *  Date is in yyyy-mm-dd format
              */
-            $startDate = TO_DATE($_POST['startDate'], 'yyyy-mm-dd');
-            $endDate = TO_DATE($_POST['endDate'], 'yyyy-mm-dd');
+            $startDate = $_POST['startDate'];
+            $endDate = $_POST['endDate'];
             $deposit = $_POST['deposit'];
             $rent = $_POST['rent'];
             $sup_name = $_POST['sName'];
-            $sql = "INSERT INTO VALUES (:rNum, :rPhone, :sDate, :eDate, :dpt, :rent, :sname)";
+            $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
+            if(!$conn) {
+                $e = oci_error;
+                print "<br> connection failed:";
+                print htmlentities($e['message']);
+                exit;
+            }
+            $sql = "INSERT INTO Lease_Agreement VALUES (:rNum, :rPhone, TO_DATE(:sDate,'yyyy-mm-dd'), TO_DATE(:eDate,'yyyy-mm-dd'), :dpt, :rent, :sname)";
             $query = oci_parse($conn, $sql);
             oci_bind_by_name($query, ':rNum', $rentalNum);
             oci_bind_by_name($query, ':rPhone', $RenterPhone);
-            oci_bind_by_name($query, ':sDatei', $startDate);
-            oci_bind_by_name($query, 'eDate', $endDate);
-            oci_bind_by_name($query, 'dpt', $deposit);
-            oci_bind_by_name($query, 'rent', $rent);
-            oci_bind_by_name($query, 'sname',$sup_name);
+            oci_bind_by_name($query, ':sDate', $startDate);
+            oci_bind_by_name($query, ':eDate', $endDate);
+            oci_bind_by_name($query, ':dpt', $deposit);
+            oci_bind_by_name($query, ':rent', $rent);
+            oci_bind_by_name($query, ':sname',$sup_name);
             if(oci_execute($query)) {
                 echo "Lease Agreement Successfully Created.";
             }
