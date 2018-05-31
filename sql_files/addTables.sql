@@ -35,10 +35,10 @@ CREATE TABLE Supervisor (
 /* Property_Owner(name, permanent address, phone) */
 CREATE TABLE Property_Owner (
     name VARCHAR(10),
+    phone VARCHAR(15) PRIMARY KEY,
     Street VARCHAR(15),
     City VARCHAR(10),
-    Zip VARCHAR(10),
-    phone VARCHAR(15) PRIMARY KEY
+    Zip VARCHAR(10)
 );
 
 /* Rental_Property(rental_num, owner, address, number of rooms, monthly rent, start date of availability, phonoe, supId) */
