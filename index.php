@@ -29,8 +29,8 @@
                 </button>
                 <div class="dropdown-menu">
                     <!-- Will need links to forms to insert only those things -->
-                    <a class="dropdown-item" href="#">Get registered as property owner</a>
-                    <a class="dropdown-item" href="#">Get registered as renter</a>
+                    <a class="dropdown-item" href="InsertPropOwner">Get registered as property owner</a>
+                    <a class="dropdown-item" href="InsertRenter">Get registered as renter</a>
                     <a class="dropdown-item" href="InsertLeaseAgreement">Make a lease agreement</a>
                 </div>
             </div>
