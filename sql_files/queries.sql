@@ -1,13 +1,11 @@
 /*1) Generate list of rental properties available for a specific 
 branch along with the manager's name*/
 SELECT rental_num, Street, City, Zip, name
---Rental_Property and Supervisor linked by empId
---Employee and Manager linked by empId
-FROM (Rental_Property NATURAL JOIN Supervisor), 
-	(Employee NATURAL JOIN Manager)
-WHERE Supervisor.managerId = Employee.empId 
-AND Manager.branchId = (SELECT branchId from 
-	Branch where branchId = (user input))
+FROM Rental_Property, Employee
+WHERE Rental_Property.empId = (Select empId From Supervisor
+Where managerId = (Select empid from Manager
+where branchId = 'b0112')) --put what user inputted here 
+AND Rental_Property.empId = Employee.empId
 AND status = 1;
 
 /*2) Generate list of supervisors and the properties (with addr)
