@@ -10,8 +10,9 @@ AND status = 1;
 
 /*2) Generate list of supervisors and the properties (with addr)
 they supervise */
-SELECT Supervisor.empId, rental_num, Street, City, Zip 
-FROM Rental_Property NATURAL JOIN Supervisor;
+SELECT Supervisor.empId, rental_num, Street, City, Zip
+FROM Rental_Property, Supervisor
+WHERE Supervisor.empId = Rental_Property.empId;
 
 /*3) Generate a list of rental properties by a specific owner, 
 listed in a happyRenter’s branch*/ 
