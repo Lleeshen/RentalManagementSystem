@@ -1,55 +1,62 @@
+<?php
+echo '
 <html>
 <head>
 <script type="text/javascript">
 
 function TableCheck() {
-    document.getElementById("ifT1").style.display = 'none';
-    document.getElementById("ifT2").style.display = 'none';
-    document.getElementById("ifT3").style.display = 'none';
-    document.getElementById("ifT4").style.display = 'none';
-    document.getElementById("ifT5").style.display = 'none';
-    document.getElementById("ifT6").style.display = 'none';
-    document.getElementById("ifT7").style.display = 'none';
-    document.getElementById("ifT8").style.display = 'none';
+    document.getElementById("ifT1").style.display = "none";
+    document.getElementById("ifT2").style.display = "none";
+    document.getElementById("ifT3").style.display = "none";
+    document.getElementById("ifT4").style.display = "none";
+    document.getElementById("ifT5").style.display = "none";
+    document.getElementById("ifT6").style.display = "none";
+    document.getElementById("ifT7").style.display = "none";
+    document.getElementById("ifT8").style.display = "none";
     if(document.getElementById("t1").selected) {
         console.log("t1 selected");
-        document.getElementById("ifT1").style.display = 'block';
+        document.getElementById("ifT1").style.display = "block";
     } else if(document.getElementById("t2").selected) {
         console.log("t2 selected");
-        document.getElementById("ifT2").style.display = 'block';
+        document.getElementById("ifT2").style.display = "block";
     } else if(document.getElementById("t3").selected) {
         console.log("t3 selected");
-        document.getElementById("ifT3").style.display = 'block';
+        document.getElementById("ifT3").style.display = "block";
     } else if(document.getElementById("t4").selected) {
         console.log("t4 selected");
-        document.getElementById("ifT4").style.display = 'block';
+        document.getElementById("ifT4").style.display = "block";
     } else if(document.getElementById("t5").selected) {
         console.log("t5 selected");
-        document.getElementById("ifT5").style.display = 'block';
+        document.getElementById("ifT5").style.display = "block";
     } else if(document.getElementById("t6").selected) {
         console.log("t6 selected");
-        document.getElementById("ifT6").style.display = 'block';
+        document.getElementById("ifT6").style.display = "block";
     } else if(document.getElementById("t7").selected) {
         console.log("t7 selected");
-        document.getElementById("ifT7").style.display = 'block';
+        document.getElementById("ifT7").style.display = "block";
     } else if(document.getElementById("t8").selected) {
         console.log("t8 selected");
-        document.getElementById("ifT8").style.display = 'block';
+        document.getElementById("ifT8").style.display = "block";
     }
 }
 
 function disableEmptyInputs(form) {
     var controls = form.elements;
     for (var i=0, iLen=controls.length; i<iLen; i++) {
-        controls[i].disabled = (controls[i].value == '');
+        controls[i].disabled = (controls[i].value == "");
     }
 }
 
 </script>
 </head>
+';
+
+echo '
 <body>
 
     <h2>Insert Rental Property Data</h2>
+
+    <a href=".."> Click here to view the tables  </a>
     <p>Choose table to insert to. The options are Branch, Manager, Supervisor, Rental Property, and Lease Agreement.</p>
 
     <form method="post" onchange="TableCheck();" onsubmit="disableEmptyInputs(this);">
@@ -64,13 +71,35 @@ function disableEmptyInputs(form) {
             <option value="LeaseAgreement" name="agreement" id="t8">Lease Agreement</option>
         </select>                          
     </form>
+';
+
+echo '
     <div id="ifT1">
         <h3> Branch form </h3>
-        <form method="post" action="..">
+        <form method="post" action=".">
             <input type="hidden" name="Branch" value=" "/>
+            <label for="bId"> Branch Id </label> <br />
+            <input type="text" name="bId" id="bId" />
+            <br />
+            <label for="bPhone"> Phone </label> <br />
+            <input type="text" name="bPhone" id="bPhone" />
+            <br />
+            <h4> Branch Address </h4>
+            <label for="bStreet"> Street </label> <br />
+            <input type="text" name="bStreet" id="bStreet" />
+            <br />
+            <label for="bCity"> City </label> <br />
+            <input type="text" name="bCity" id="bcity" />
+            <br />
+            <label for="bZip"> Zip code </label> <br />
+            <input type="text" name="bZip" id="bZip" />
+            <br />
             <button type="submit"> Submit! </button>
         </form>
     </div>
+';
+
+echo '
     <div id="ifT2" style="display:none">
         <h3> Employee form </h3>
         <form method="post" action="..">
@@ -122,3 +151,7 @@ function disableEmptyInputs(form) {
     </div>
 </body>
 </html>
+
+';
+
+?>
