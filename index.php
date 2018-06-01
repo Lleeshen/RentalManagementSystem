@@ -8,6 +8,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"> </script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"> </script>
+<script type="text/javascript">
+
+function TableCheck() {
+}
+
+</script>
     </head>
     <body>
         <div class="jumbotron jumbotron-fluid">
@@ -44,8 +50,12 @@
                 <div class="form-group">
                     <label for="action"> Select operation </label>
                     <select class="form-control" id="action" name="oplist">
-                        <option id="op1"> Show availible properties </option>
-                        <option id="op2"> Show Lease Agreements expiring soon </option>
+                        <option id="op1"
+                            value="Select"
+                            > List properties  </option>
+                        <option id="op2"
+                            value=""
+                        > Show Lease Agreements expiring soon </option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Do this action! </button>
@@ -58,6 +68,9 @@
                 print "<br> connection failed:";
                 print htmlentities($e['message']);
                 exit;
+            }
+            if(!empty($_POST)) {
+                $sql_main = $_POST["oplist"];
             }
             //Show Table operations
             oci_close($conn);

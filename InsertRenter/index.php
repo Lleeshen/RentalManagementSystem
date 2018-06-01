@@ -61,6 +61,7 @@
             }
         }
         //Insert if received input, display message if successful
+        oci_close($conn);
     ?>
     </p>
     </div>

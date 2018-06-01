@@ -73,6 +73,14 @@ echo '
     </form>
 ';
 
+$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
+if(!$conn) {
+    $e = oci_error();
+    print "<br> connection failed:";
+    print htmlentities($e['message']);
+    exit;
+}
+
 echo '
     <div id="ifT1">
         <h3> Branch form </h3>
@@ -89,7 +97,7 @@ echo '
             <input type="text" name="bStreet" id="bStreet" />
             <br />
             <label for="bCity"> City </label> <br />
-            <input type="text" name="bCity" id="bcity" />
+            <input type="text" name="bCity" id="bCity" />
             <br />
             <label for="bZip"> Zip code </label> <br />
             <input type="text" name="bZip" id="bZip" />
@@ -98,6 +106,23 @@ echo '
         </form>
     </div>
 ';
+
+if(!empty($_POST) && isset($_POST["Branch"])) {
+    $bId = $_POST["bId"];
+    $bPhone = $_POST["bPhone"];
+    $bStreet = $_POST["bStreet"];
+    $bCity = $_POST["bCity"];
+    $bZip = $_POST["bZip"];
+    $sql = "INSERT INTO Branch VALUES (:id, :phone, :street, :city, :zip )";
+    $query = oci_parse($conn, $sql);
+    oci_bind_by_name($query, ':id', $bId);
+    oci_bind_by_name($query, ':phone', $bPhone);
+    oci_bind_by_name($query, ':street', $bStreet);
+    oci_bind_by_name($query, ':city', $bCity);
+    oci_bind_by_name($query, ':zip', $bZip);
+    oci_execute($query);
+    oci_free_statement($query);
+}
 
 echo '
     <div id="ifT2" style="display:none">
