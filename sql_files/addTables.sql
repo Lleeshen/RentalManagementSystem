@@ -44,7 +44,7 @@ CREATE TABLE Property_Owner (
 /* Rental_Property(rental_num, owner, address, number of rooms, monthly rent, start date of availability, phonoe, supId) */
 CREATE TABLE Rental_Property (
     rental_num INTEGER PRIMARY KEY,
-    status INTEGER,
+    status INTEGER, --Available : 1, unavailable: 0
     Street VARCHAR(15),
     City VARCHAR(10),
     Zip VARCHAR(10),
