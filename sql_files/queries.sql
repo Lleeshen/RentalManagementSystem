@@ -24,10 +24,10 @@ WHERE owner_phone = (Select phone from Property_Owner where
 /*4) Show  a  listing  of  properties  available,  where  the  
 properties  should  satisfy  the  criteria (city, no of rooms 
 and/or range for rent given as input). */
-SELECT rental_num, start_date_of_availability
+SELECT rental_num, start_date_of_availibility
 FROM Rental_Property
-WHERE city = (user input) AND num_rooms = (user input)
-AND monthly_rent IN (user input);
+WHERE city = 'SJ' AND num_rooms = 3 --user input
+AND monthly_rent < 500 AND monthly_rent > 300; -- min and max rent
 
 /*5) Show the number of properties available for rent. */ 
 SELECT count(*)
@@ -39,7 +39,7 @@ information  to  be  entered  into  this agreement  can  be
 input  via  a  Graphical  User  interface  (See  section  2.1)  
 or  from  the command line. */
 
-/*7) Show a lease agreement for a renter. */ 
+/*7) Show a lease agreement for a renter. start here*/ 
 SELECT * FROM Lease_Agreement
 WHERE renter_wphone = 
 	(Select work_phone from Renter where name = (user input));
