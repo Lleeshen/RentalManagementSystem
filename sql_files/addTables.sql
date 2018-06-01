@@ -52,9 +52,9 @@ CREATE TABLE Rental_Property (
     monthly_rent NUMERIC(5,2),
     start_date_of_availibility DATE,
     owner_phone VARCHAR(15),
-    supId VARCHAR(15),
+    empId VARCHAR(15), --Supervisor id
     Foreign key (owner_phone) references Property_Owner (phone),
-    Foreign key (supId) references Supervisor (empid)
+    Foreign key (empId) references Supervisor (empid)
 );
 /* Renter(renter_name, home_phone, work_phone) */
 CREATE TABLE Renter (
