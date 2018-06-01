@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8"/>
+      <title>What Would You Like to Inquire About?</title>
+   </head>
+   <body>
+    <!--Need to change the path! -->
+   <form method="post" action="http://linux.students.engr.scu.edu/~fkuan/COEN178/procBookInput.php">
+  
+  <!--branchId needed for Query 1 -->
+  <fieldset>
+        <legend style="color:blue;font-size:30px">Give the branch Id to see a listing of the properties and supervisors associated with the specific branch</legend>
+        <label for="branchId">branchId:</label>
+                <input type="text" name="branchId" id="branchId">
+  </fieldset>
+
+<!-- for Query 3: give owner name (or should it be phone number?) to get back the rental properties they own-->
+  <fieldset>
+          <legend style="color:blue;font-size:30px">Display Rental Properties by Owner name (warning: Owner name not necessarily unique)</legend>
+          <label for="o_name">Name of Owner:</label>
+                <input type="text" name="o_name" id="o_name">
+  </fieldset>
+
+<!--Query 4:Listing of Available based on city, no. of rooms, and/or range of rent given as input-->  
+  <fieldset>
+          <legend style="color:blue;font-size:30px">Listing of Available based on the following parameters:</legend>
+          <label for="city">City:</label>
+                <input type="text" name="city" id="city">
+          <label for="no_of_rooms">Number of Rooms:</label>
+                <input type="number" name="no_of_rooms" id= "no_of_rooms">
+          <label for="min_rent">Minimum Range of Rent:</label>
+                <input type="number" name="min_rent" id= "min_rent">
+          <label for="max_rent">Maximum Range of Rent:</label>
+                <input type="number" name="max_rent" id= "max_rent">
+  </fieldset>
+
+<!--Query 7: Given renter's name, display lease agreement-->
+  <fieldset>
+          <legend style="color:blue;font-size:30px">Display Lease Agreement of a Renter, given his/her name (may not be unique)</legend>
+          <label for="r_name">Renter's name:</label>
+                <input type="text" name="r_name" id="r_name">
+  </fieldset>
+
+<!--Query 9: Average rent of properties given a city-->
+  <fieldset>
+          <legend style="color:blue;font-size:30px">Display Average Rent of available properties in a city you provide</legend>
+          <label for="city">City:</label>
+                <input type="text" name="city" id="city">
+  </fieldset>
+  
+            <input type="submit" value="Submit">
+ </form>
+   </body>
+</html>
+
+
+
