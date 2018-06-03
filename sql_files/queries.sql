@@ -39,7 +39,7 @@ information  to  be  entered  into  this agreement  can  be
 input  via  a  Graphical  User  interface  (See  section  2.1)  
 or  from  the command line. */
 
-/*7) Show a lease agreement for a renter. start here*/ 
+/*7) Show a lease agreement for a renter.*/ 
 SELECT * FROM Lease_Agreement
 WHERE renter_wphone = 
 	(Select work_phone from Renter where name = (user input));
@@ -61,6 +61,7 @@ WHERE work_phone IN (Select distinct renter_wphone
  will expire in next two months (from the current date). */
  SELECT rental_num, Street, City, Zip 
  FROM Rental_Property
- WHERE rental_num = (Select rental_num From Lease_Agreement
- 	Where (Select DATEDDIFF(month, CURRENT_DATE(), end_date)
- 		From Lease_Agreement) < 2; 
+ where
+ EXISTS 
+ ((SELECT (trunc(SYSDATE) - end_date) From Lease_Agreement) 
+ 	< 2);
