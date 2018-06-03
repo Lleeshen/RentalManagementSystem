@@ -1,3 +1,5 @@
+<?php
+echo '
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,19 +14,71 @@
     <p> Choose which type of data to show in menu. </p>
     <form method="post"  action=".">
         <select name="tables">
-            <option value="Branch">Branch</option>
-            <option value="Employee">Employee</option>
-            <option value="Manager">Manager</option>
-            <option value="Supervisor">Supervisor</option>
-            <option value="Property_Owner"> Property Owner </option>
-            <option value="Rental_Property">Rental Property</option>
-            <option value="Renter" name="renter">Renter</option>
-            <option value="Lease_Agreement" name="agreement">Lease Agreement</option>
+            <option value="Branch" 
+';
+        if(!empty($_POST) && $_POST["tables"] == "Branch") {
+            echo ' selected ';
+        }
+echo '
+                >Branch</option>
+            <option value="Employee"
+';
+        if(!empty($_POST) && $_POST["tables"] == "Employee") {
+            echo ' selected ';
+        }
+echo '
+    >Employee</option>
+            <option value="Manager"
+';
+        if(!empty($_POST) && $_POST["tables"] == "Manager") {
+            echo ' selected ';
+        }
+        
+echo'
+                >Manager</option>
+            <option value="Supervisor"
+';
+        if(!empty($_POST) && $_POST["tables"] == "Supervisor") {
+            echo ' selected ';
+        }
+
+echo'
+                >Supervisor</option>
+            <option value="Property_Owner"
+';
+        if(!empty($_POST) && $_POST["tables"] == "Property_Owner") {
+            echo ' selected ';
+        }
+echo '
+                > Property Owner </option>
+            <option value="Rental_Property"
+';
+        if(!empty($_POST) && $_POST["tables"] == "Rental_Property") {
+            echo ' selected ';
+        }
+
+echo '
+                >Rental Property</option>
+            <option value="Renter" 
+';
+        if(!empty($_POST) && $_POST["tables"] == "Renter") {
+            echo ' selected ';
+        } 
+echo '
+                >Renter</option>
+            <option value="Lease_Agreement"
+';
+        if(!empty($_POST) && $_POST["tables"] == "Lease_Agreement") {
+            echo ' selected ';
+        }
+echo '
+                >Lease Agreement</option>
         </select>
         <br /> <br />
         <button type="submit"> Display table </button>
     </form>
-<?php
+';
+
     //Table name is input
     if(!empty($_POST)) {
         $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
@@ -61,6 +115,9 @@
         oci_free_statement($query);
         oci_close($conn);
     }
-?>
+echo '
 </body>
 </html>
+';
+
+?>
