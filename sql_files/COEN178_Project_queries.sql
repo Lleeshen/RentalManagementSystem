@@ -60,9 +60,8 @@ WHERE work_phone IN (Select distinct renter_wphone
 
  /*10) Show the names and addresses of properties whose leases 
  will expire in next two months (from the current date). */
- SELECT rental_num, Street, City, Zip 
- FROM Rental_Property
- where
- EXISTS 
- ((SELECT (trunc(SYSDATE) - end_date) From Lease_Agreement) 
- 	< 2);
+  SELECT Rental_Property.rental_num, Street, City, Zip, end_date
+ FROM Rental_Property, Lease_Agreement
+ where Rental_Property.rental_num = Lease_Agreement.rental_num
+ AND end_date <= trunc(SYSDATE + 60)
+ AND end_date >= trunc(SYSDATE);
