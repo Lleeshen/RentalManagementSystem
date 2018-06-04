@@ -19,7 +19,7 @@ CREATE TABLE Employee (
 /* Manager(empId, branchId) */
 CREATE TABLE Manager (
     empId VARCHAR(5) PRIMARY KEY,
-    branchId VARCHAR(5),
+    branchId VARCHAR(5) UNIQUE,
     Foreign key (empid) references Employee(empid),
     Foreign key (branchid) references Branch(branchid)
 );
@@ -44,7 +44,7 @@ CREATE TABLE Property_Owner (
 /* Rental_Property(rental_num, owner, address, number of rooms, monthly rent, start date of availability, phonoe, supId) */
 CREATE TABLE Rental_Property (
     rental_num INTEGER PRIMARY KEY,
-    status INTEGER, --Available : 1, unavailable: 0
+    status VARCHAR(10),
     Street VARCHAR(15),
     City VARCHAR(10),
     Zip VARCHAR(10),
