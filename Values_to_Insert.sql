@@ -42,49 +42,49 @@ Insert into Property_Owner values('Ariana', '7682229997',
 	'648 Banana Ct', 'SF', '68976');
 
 /*Insert into Rental_property*/
-Insert into Rental_Property values(13, 1, '345 Sunny St.', 
+Insert into Rental_Property values(13, 'available', '345 Sunny St.', 
 	'SJ', '34678', 3, 450.3, TO_DATE('2018-03-23','YY-MM-DD'),
 	'5106786789', 'b2345');
-Insert into Rental_Property values(15, 0, '105 Eggy Dr.', 
+Insert into Rental_Property values(15, 'leased', '105 Eggy Dr.', 
 	'LA', '56709', 4, 560.1, TO_DATE('2019-04-29','YY-MM-DD'), 
 	'4089915467', 'b2345');
-Insert into Rental_Property values(2, 1, '789 Bunny Ln', 'SC',
+Insert into Rental_Property values(2, 'available', '789 Bunny Ln', 'SC',
 	'98051', 2, 320.56, TO_DATE('2013-03-19','YY-MM-DD'),
 	'5106786789', 'c3456');
-Insert into Rental_Property values(14, 1, '23 Cake Rd', 'SJ',
+Insert into Rental_Property values(14, 'available', '23 Cake Rd', 'SJ',
 	'34678', 1, 100.0, TO_DATE('2018-03-23','YY-MM-DD'),
 	'4089915467', 'b2345');
-Insert into Rental_Property values(10, 0, '46 Truffle Ct', 
+Insert into Rental_Property values(10, 'leased', '46 Truffle Ct', 
 	'LA', '56709', 6, 900.70, TO_DATE('2015-07-01','YY-MM-DD'), 
 	'2225679901', 'c3456'); 
-Insert into Rental_Property values(1, 0, '106 Kitkat Ct', 
+Insert into Rental_Property values(1, 'available', '106 Kitkat Ct', 
 	'BKNY', '88951', 2, 400.8, TO_DATE('2018-07-14','YY-MM-DD'), 
 	'4567938001', 'd1136'); 
-Insert into Rental_Property values(5, 1, '33 Skittle Rd', 
-	'BKNY', '88951', 9, 999.99, TO_DATE('2020-01-01','YY-MM-DD'), 
+Insert into Rental_Property values(5, 'available', '33 Skittle Rd', 
+	'BKNY', '88951', 9, 999.99, TO_DATE('2018-06-01','YY-MM-DD'), 
 	'5671110009', 'd1136'); 
-Insert into Rental_Property values(9, 0, '556 M&M Ln', 'BKNY', 
+Insert into Rental_Property values(9, 'available', '556 M&M Ln', 'BKNY', 
 	'88951', 2, 250.5, TO_DATE('2009-09-01','YY-MM-DD'),
 	'4567938001', 'd1136');
-Insert into Rental_Property values(10, 1, '90 Mochi St', 
+Insert into Rental_Property values(10, 'available', '90 Mochi St', 
 	'BKNY', '88951', 4, 760.2, TO_DATE('2018-02-20','YY-MM-DD'),
 	'4567938001', 'd1136');
-Insert into Rental_Property values(8, 0, '210 Pasta Place',
+Insert into Rental_Property values(8, 'leased', '210 Pasta Place',
 	'BKNY', '88951', 2, 210.9, TO_DATE('2016-12-30','YY-MM-DD'),
 	'4567938001', 'd1136');
-Insert into Rental_Property values(6, 0, '18 Vanilla Dr',
+Insert into Rental_Property values(6, 'leased', '18 Vanilla Dr',
 	'BKNY', '88951', 2, 190.8, TO_DATE('2018-06-15','YY-MM-DD'),
 	'2225679901','d1136');
-Insert into Rental_Property values(7, 0, '666 Orange Dr',
+Insert into Rental_Property values(7, 'leased', '666 Orange Dr',
 	'BKNY', '88951', 4, 472.5, TO_DATE('2018-03-22','YY-MM-DD'),
 	'6507902213', 'd1136');
-Insert into Rental_Property values(4, 1, '436 Pear Place',
+Insert into Rental_Property values(4, 'available', '436 Pear Place',
 	'LA', '67864', 3, 301.6, TO_DATE('2018-06-01','YY-MM-DD'),
 	'7682229997', 'c3456');
-Insert into Rental_Property values(21, 1, '740 Coconut Ct',
+Insert into Rental_Property values(21, 'available', '740 Coconut Ct',
 	'LA', '67864', 6, 999.0, TO_DATE('2018-06-01','YY-MM-DD'),
 	'7682229997', 'c3456');
-Insert into Rental_Property values(19, 1, '157 Rice Rd', 'LA',
+Insert into Rental_Property values(19, 'available', '157 Rice Rd', 'LA',
 	'67864', 2, 350.5, TO_DATE('2018-06-01','YY-MM-DD'),
 	'7682229997', 'b2345');
 
@@ -111,6 +111,9 @@ Insert into Lease_Agreement values(8, '4327785567',
 	'YY-MM-DD'), 210.9, 210.9, 'Rita');
 Insert into Lease_Agreement values(8, '5449008721',
 	TO_DATE('2016-01-01','YY-MM-DD'), TO_DATE('2016-12-30',
+	'YY-MM-DD'), 210.9, 210.9, 'Rita');
+Insert into Lease_Agreement values(8, '2405409801',
+	TO_DATE('2017-12-20','YY-MM-DD'), TO_DATE('2018-07-01',
 	'YY-MM-DD'), 210.9, 210.9, 'Rita');
 Insert into Lease_Agreement values(10, '2345970009', 
 	TO_DATE('2014-09-30','YY-MM-DD'), 
