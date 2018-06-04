@@ -13,17 +13,22 @@ echo '
         <script type="text/javascript">
 
 function formCheck() {
+    var x = document.getElementsByClassName("notAllOp");
+    var i;
+    for(i = 0; i < x.length; i++) {
+        x[i].classList.add("d-none");
+    }
     if(document.getElementById("op1").selected) {
         document.getElementById("forOp1").classList.remove("d-none");
-    } else {
-        document.getElementById("forOp1").classList.add("d-none");
-    }
-    if(document.getElementById("op3").selected) {
+    } else if(document.getElementById("op3").selected) {
         document.getElementById("forOp3").classList.remove("d-none");
-    } else {
-        document.getElementById("forOp3").classList.add("d-none");
+    } else if(document.getElementById("op4").selected) {
+        document.getElementById("forOp4").classList.remove("d-none");
+    } else if(document.getElementById("op7").selected) {
+        document.getElementById("forOp7").classList.remove("d-none");
+    } else if(document.getElementById("op9").selected) {
+        document.getElementById("forOp9").classList.remove("d-none");
     }
-
 }
 
 window.onload = formCheck;
@@ -85,22 +90,124 @@ echo '
         echo ' selected ';
     }
 echo '
-                        > List rental properties by an owner </option>
+                         > List rental properties by an owner </option>
+                        <option id="op4" value="op4"
+';
+    if(!empty($_POST) && $_POST["oplist"] == "op4") {
+        echo ' selected ';
+    }    
+echo '
+                        > List availible properties with conditions </option>
+                        <option id="op5" value="op5"
+';
+    if(!empty($_POST) && $_POST["oplist"] == "op5") {
+        echo ' selected ';
+    }
+echo '
+                        > Show number of properties availible for rent </option>
+                        <option id="op7" value="op7"
+';
+    if(!empty($_POST) && $_POST["oplist"] == "op7") {
+        echo ' selected ';
+    }
+echo '
+                        > Show a lease agreement for a renter </option>
+                        <option id="op8" value="op8"
+';
+    if(!empty($_POST) && $_POST["oplist"] == "op8") {
+        echo ' selected ';
+    }
+echo '
+                        > Show renters who rented more than 1 property </option>
+                        <option id="op9" value="op9"
+';
+    if(!empty($_POST) && $_POST["oplist"] == "op9") {
+        echo ' selected ';
+    }
+echo '
+                        > Show average rent of properties in a city </option>
                     </select>
                 </div>
-                <div id="forOp1" class="form-group">
+                <div id="forOp1" class="form-group notAllOp">
                     <label for="bId"> Branch Id </label>
-                    <input type="text" class="form-control" id="bId" name="bId"/>
+                    <input type="text" class="form-control" id="bId" name="bId"
+                    ';
+if(!empty($_POST) && isset($_POST["oPhone"])) {
+    echo "value = $_POST[bId]  ";
+}
+echo '              />
                 </div>
-                <div id="forOp3" class="form-group d-none">
+                <div id="forOp3" class="form-group notAllOp">
                     <label for="oPhone"> Owner\'s phone </label>
-                    <input type="text" class="form-control" id="oPhone" name="oPhone" />
+                    <input type="text" class="form-control" id="oPhone" name="oPhone" 
+';
+if(!empty($_POST) && isset($_POST["oPhone"])) {
+    echo "value = $_POST[oPhone]  ";
+}
+echo'
+                        />
                 </div>
-                <div id="forOp4" class="form-group d-none">
+                <div id="forOp4" class="notAllOp">
+                    <div class="form-group">
+                        <label for="pCity"> City </label>
+                        <input type="text" class="form-control" id="pCity" name="pCity"
+';
+if(!empty($_POST) && isset($_POST["pCity"])) {
+    echo "value = $_POST[pCity]  ";
+}
+echo '
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="pRooms"> Number of Rooms </label>
+                        <input type="text" class="form-control" id="pRooms" name="pRooms"
+';
+if(!empty($_POST) && isset($_POST["pRooms"])) {
+    echo "value = $_POST[pRooms]  ";
+}
+echo'
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="pMinRent"> Minimum Rent </label>
+                        <input type="text" class="form-control" id="pMinRent" name="pMinRent"
+';
+if(!empty($_POST) && isset($_POST["pMinRent"])) {
+    echo "value = $_POST[pMinRent]  ";
+}
+echo '
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="pMaxRent"> Maximum Rent </label>
+                        <input type="text" class="form-control" id="pMaxRent" name="pMaxRent"
+';
+if(!empty($_POST) && isset($_POST["pMaxRent"])) {
+    echo "value = $_POST[pMaxRent]  ";
+}
+echo '
+                        />
+                    </div>
                 </div>
-                <div id="forOp7" class="form-group d-none">
+                <div id="forOp7" class="form-group notAllOp">
+                    <label for="rWPhone"> Renter\'s Work Phone </label>
+                    <input type="text" class="form-control" id="rWPhone" name="rWPhone"
+';
+if(!empty($_POST) && isset($_POST["rWPhone"])) {
+    echo "value = $_POST[rWPhone]  ";
+}
+echo '
+                        />
                 </div>
-                <div id="forOp9" class="form-group d-none">
+                <div id="forOp9" class="form-group notAllOp">
+                    <label for="pCity"> City </label>
+                    <input type="text" class="form-control" id="pCity" name="pCity"
+';
+    if(!empty($_POST) && isset($_POST["pCity"])) {
+        echo "value = $_POST[pCity]";
+    }
+echo '
+                    />
                 </div>
                 <button type="submit" class="btn btn-primary">Do this action! </button>
             </form>
@@ -124,7 +231,7 @@ echo '
                     $bId = $_POST["bId"];
                     $sql = "
                         SELECT rental_num, Street, City, Zip, name
-                        FROM Rental_Proiperty, Employee
+                        FROM Rental_Property, Employee
                         WHERE Rental_Property.empId IN  (
                             Select empId 
                             From Supervisor
@@ -145,6 +252,73 @@ echo '
                         SELECT Supervisor.empId, rental_num, Street, City, Zip
                         FROM Rental_Property, Supervisor
                         WHERE Supervisor.empId = Rental_Property.empId
+                    ";
+                    $query = oci_parse($conn,$sql);
+                    oci_execute($query);
+                    $numCol = oci_num_fields($query);
+                } else if ($sql_main == "op3") {
+                    $oPhone = $_POST["oPhone"];
+                    $sql = "
+                        SELECT rental_num, Street, City, Zip 
+                        FROM Rental_Property 
+                        WHERE owner_phone = $oPhone
+                    ";
+                    $query = oci_parse($conn,$sql);
+                    oci_execute($query);
+                    $numCol = oci_num_fields($query);
+                } else if ($sql_main == "op4") {
+                    $pCity = $_POST["pCity"];
+                    $pRooms = $_POST["pRooms"];
+                    $minRent = $_POST["pMinRent"];
+                    $maxRent = $_POST["pMaxRent"];
+                    $sql = "
+                        SELECT rental_num, start_date_of_availibility
+                        FROM Rental_Property
+                        WHERE city = '$pCity' AND num_rooms = $pRooms
+                        AND monthly_rent < ' $maxRent' AND monthly_rent > $minRent
+                    ";
+                    $query = oci_parse($conn,$sql);
+                    oci_execute($query);
+                    $numCol = oci_num_fields($query);
+                } else if ($sql_main == "op5") {
+                    $sql = "
+                        SELECT COUNT(*)
+                        FROM Rental_Property
+                        WHERE status = 1
+                    ";
+                    $query = oci_parse($conn,$sql);
+                    oci_execute($query);
+                    $numCol = oci_num_fields($query);
+                } else if ($sql_main == "op7") {
+                    $rPhone = $_POST["rWPhone"];
+                    $sql = "
+                        SELECT * 
+                        FROM Lease_Agreement
+                        WHERE renter_wphone = $rPhone
+                    ";
+                    $query = oci_parse($conn,$sql);
+                    oci_execute($query);
+                    $numCol = oci_num_fields($query);
+                } else if ($sql_main == "op8") {
+                    $sql = "
+                        SELECT *
+                        FROM Renter
+                        WHERE work_phone IN (
+                            SELECT DISTINCT renter_wphone
+                            FROM Lease_Agreement
+                            GROUP BY renter_wphone
+                            HAVING COUNT(*) > 1
+                        )
+                    ";
+                    $query = oci_parse($conn,$sql);
+                    oci_execute($query);
+                    $numCol = oci_num_fields($query);
+                } else if ($sql_main == "op9") {
+                    $city = $_POST["pCity"];
+                    $sql = "
+                        SELECT AVG(monthly_rent)
+                        FROM Rental_Property
+                        WHERE city = '$city' AND status = 1
                     ";
                     $query = oci_parse($conn,$sql);
                     oci_execute($query);
@@ -173,8 +347,8 @@ echo '
                 echo '</tbody>';
                 echo '</table>';
                 echo '</div>';
+                oci_close($conn);
             }
-            oci_close($conn);
         ?>
     </body>   
 </html>
