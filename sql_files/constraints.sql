@@ -20,7 +20,7 @@ CREATE Or Replace TRIGGER increaseRent
 
     newRentalNum    INTEGER;
     newRentalDate   DATE;
-    dateToChange    DATE
+    dateToChange    DATE;
 
     BEFORE EACH ROW IS
     BEGIN
