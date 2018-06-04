@@ -46,10 +46,10 @@ Insert into Rental_Property values(13, 1, '345 Sunny St.',
 	'SJ', '34678', 3, 450.3, TO_DATE('2018-03-23','YY-MM-DD'),
 	'5106786789', 'b2345');
 Insert into Rental_Property values(15, 0, '105 Eggy Dr.', 
-	'LA', '56709', 4, 200.3, TO_DATE('2018-05-19','YY-MM-DD'), 
+	'LA', '56709', 4, 560.1, TO_DATE('2018-05-19','YY-MM-DD'), 
 	'4089915467', 'b2345');
 Insert into Rental_Property values(2, 1, '789 Bunny Ln', 'SC',
-	'98051', 2, 320.56, TO_DATE('2012-06-28','YY-MM-DD'),
+	'98051', 2, 320.56, TO_DATE('2018-06-28','YY-MM-DD'),
 	'5106786789', 'c3456');
 Insert into Rental_Property values(14, 1, '23 Cake Rd', 'SJ',
 	'34678', 1, 100.0, TO_DATE('2018-03-23','YY-MM-DD'),
@@ -94,27 +94,34 @@ Insert into Renter values('Andy', '3457329087', '2405409801');
 Insert into Renter values('Annie', '6439018760', '2345970009');
 Insert into Renter values('Albert', '6782002222', '5449008721');
 Insert into Renter values('Anakin', '6439018760', '123986003');
+Insert into Renter values('Allen', '4679007895', '4327785567');
 
 /*Insert into Lease_Agreement */
 Insert into Lease_Agreement values(15, '2405409801',  
-	TO_DATE('2018-05-19','YY-MM-DD'),  TO_DATE('2020-06-01',
-	'YY-MM-DD'), 50, 560.1, 'Anna');
+	TO_DATE('2018-05-19','YY-MM-DD'),  TO_DATE('2019-04-29',
+	'YY-MM-DD'), 560.1, 560.1, 'Anna');
 Insert into Lease_Agreement values(2, '2405409801', 
-	TO_DATE('2012-04-20','YY-MM-DD'), TO_DATE('2018-03-19',
-	'YY-MM-DD'), 100, 320.56, 'Darren');
+	TO_DATE('2012-04-20','YY-MM-DD'), TO_DATE('2013-03-19',
+	'YY-MM-DD'), 320.56, 320.56, 'Darren');
 Insert into Lease_Agreement values(8, '2405409801',
-	TO_DATE('2018-03-19','YY-MM-DD'), TO_DATE('2021-01-01',
-	'YY-MM-DD'), 75, 210.9, 'Rita');
+	TO_DATE('2013-03-20','YY-MM-DD'), TO_DATE('2014-01-01',
+	'YY-MM-DD'), 210.9, 210.9, 'Rita');
+Insert into Lease_Agreement values(8, '4327785567',
+	TO_DATE('2015-01-10','YY-MM-DD'), TO_DATE('2015-09-01',
+	'YY-MM-DD'), 210.9, 210.9, 'Rita');
+Insert into Lease_Agreement values(8, '5449008721',
+	TO_DATE('2016-01-01','YY-MM-DD'), TO_DATE('2016-12-30',
+	'YY-MM-DD'), 210.9, 210.9, 'Rita');
 Insert into Lease_Agreement values(10, '2345970009', 
 	TO_DATE('2014-09-30','YY-MM-DD'), 
-	TO_DATE('2018-07-01','YY-MM-DD'), 100, 900.70, 'Rita');
+	TO_DATE('2015-07-01','YY-MM-DD'), 900.7, 900.7, 'Rita');
 Insert into Lease_Agreement values(9, '5449008721', 
-	TO_DATE('2009-01-01','YY-MM-DD'),  TO_DATE('2011-01-01',
-	'YY-MM-DD'), 50, 250.5, 'Rita');
+	TO_DATE('2009-01-01','YY-MM-DD'),  TO_DATE('2009-09-01',
+	'YY-MM-DD'), 250.5, 250.5, 'Rita');
 Insert into Lease_Agreement values(6, '5449008721',
-	 TO_DATE('2011-01-01','YY-MM-DD'), TO_DATE('2018-06-15',
-	 'YY-MM-DD'), 100, 190.8, 'Rita');
+	 TO_DATE('2018-01-01','YY-MM-DD'), TO_DATE('2018-06-15',
+	 'YY-MM-DD'), 190.8, 190.8, 'Rita');
 Insert into Lease_Agreement values(7, '123986003',
-	TO_DATE('2017-05-31','YY-MM-DD'),  TO_DATE('2018-07-22',
-	'YY-MM-DD'), 50, 472.5, 'Rita');
+	TO_DATE('2017-05-31','YY-MM-DD'),  TO_DATE('2018-03-22',
+	'YY-MM-DD'), 472.5, 472.5, 'Rita');
 
