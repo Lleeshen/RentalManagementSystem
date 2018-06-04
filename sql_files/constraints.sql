@@ -1,21 +1,5 @@
-
-CREATE OR REPLACE TRIGGER LeaseAgreementLength
-AFTER INSERT OR UPDATE ON Lease_Agreement
-FOR EACH ROW
-DECLARE
-    DayDiff INTEGER;
-BEGIN
-    DayDiff := :new.end_date - :new.start_date;
-    IF (DayDiff < 180 OR DayDiff > 366)
-THEN
-    raise_application_error(-20000,'Agreement must be between 6 months and 1 year');
-END IF;
-END;
-/
-show errors;
-
-
 /* When  a  lease  agreement  is  created,  the  status  for  the  property  should  be  changed  to leased. */
+
 CREATE OR REPLACE TRIGGER LeaseAgreementStatusUpdate
 AFTER INSERT ON Lease_Agreement
 FOR EACH ROW
@@ -25,8 +9,32 @@ BEGIN
     WHERE rental_num = :new.rental_num;
 END;
 /
+show errors;
 
-/*
-insert into lease_agreement values (7,'2405409801',TO_DATE('2018-01-01','YY-MM-DD'),TO_DATE('2018-02-01','YY-MM-DD'),200,300,'Anna');
+/* With  every  new  lease,  a  10%  increase  in  rent  should  be  added  to  the  rent  from  the previous lease. 
 */
+
+CREATE Or Replace TRIGGER increaseRent
+    FOR INSERT ON Lease_Agreement
+        COMPOUND TRIGGER
+
+    newRentalNum    INTEGER;
+    newRentalDate   DATE;
+
+    BEFORE EACH ROW IS
+    BEGIN
+        newRentalNum := :new.rental_num;
+        newRentalDate:= :new.start_date;
+    END BEFORE EACH ROW;
+
+    AFTER STATEMENT IS
+    BEGIN
+        UPDATE Lease_Agreement
+        SET rent_amt = rent_amt * 1.1
+        WHERE rental_num = newRentalNum AND start_date <> newRentalDate;
+    END AFTER STATEMENT;
+    
+END increaseRent;
+/
+show errors;
 
