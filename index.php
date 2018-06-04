@@ -126,12 +126,13 @@ echo '
     }
 echo '
                         > Show average rent of properties in a city </option>
-                        <option id ="op10 value="op10"
+                        <option id ="op10" value="op10"
 ';
     if(!empty($_POST) && $_POST["oplist"] == "op10"){
         echo ' selected ';
     }
 echo '
+                        > Show Lease Agreements expiring in the next 2 months </option>
                     </select>
                 </div>
                 <div id="forOp1" class="form-group notAllOp">
@@ -329,7 +330,7 @@ echo '
                     $query = oci_parse($conn,$sql);
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
-                }else if ($sql_main == "op10") {
+                } else if ($sql_main == "op10") {
                     $sql = "
                         SELECT Rental_Property.rental_num, Street, City, Zip, end_date
                         FROM Rental_Property, Lease_Agreement
