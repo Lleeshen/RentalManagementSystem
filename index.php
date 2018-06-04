@@ -126,6 +126,12 @@ echo '
     }
 echo '
                         > Show average rent of properties in a city </option>
+                        <option id ="op10 value="op10"
+';
+    if(!empty($_POST) && $_POST["oplist"] == "op10"){
+        echo ' selected ';
+    }
+echo '
                     </select>
                 </div>
                 <div id="forOp1" class="form-group notAllOp">
@@ -319,6 +325,17 @@ echo '
                         SELECT AVG(monthly_rent)
                         FROM Rental_Property
                         WHERE city = '$city' AND status = 1
+                    ";
+                    $query = oci_parse($conn,$sql);
+                    oci_execute($query);
+                    $numCol = oci_num_fields($query);
+                }else if ($sql_main == "op10") {
+                    $sql = "
+                        SELECT Rental_Property.rental_num, Street, City, Zip, end_date
+                        FROM Rental_Property, Lease_Agreement
+                        WHERE Rental_Property.rental_num = Lease_Agreement.rental_num
+                        AND end_date <= trunc(SYSDATE + 60)
+                        AND end_date >= trunc(SYSDATE)
                     ";
                     $query = oci_parse($conn,$sql);
                     oci_execute($query);
