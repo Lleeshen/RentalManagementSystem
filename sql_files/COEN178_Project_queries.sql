@@ -6,7 +6,7 @@ WHERE Rental_Property.empId IN (Select empId From Supervisor
 Where managerId = (Select empid from Manager
 where branchId = (user input))) --put what user inputted here 
 AND Rental_Property.empId = Employee.empId
-AND status = "status";
+AND status = "available";
 
 /*2) Generate list of supervisors and the properties (with addr)
 they supervise */
@@ -32,7 +32,7 @@ AND monthly_rent < 500 AND monthly_rent > 300; -- min and max rent
 /*5) Show the number of properties available for rent. */ 
 SELECT count(*) AS Available_Property
 FROM Rental_Property
-WHERE status = "status"; 
+WHERE status = "available"; 
 
 /*6) Create  a  lease  agreement  (See  section  1.1).  The  
 information  to  be  entered  into  this agreement  can  be  
@@ -42,8 +42,7 @@ or  from  the command line. */
 /*7) Show a lease agreement for a renter.*/ 
 SELECT * FROM Lease_Agreement, Renter
 WHERE renter_wphone = work_phone AND
-renter_wphone = (Select work_phone from Renter
-where name = (user input));
+renter_wphone = (user input);
 
 /*8) Show the renters who rented more than one rental property.*/
 SELECT * FROM Renter 
