@@ -20,11 +20,19 @@ CREATE Or Replace TRIGGER increaseRent
 
     newRentalNum    INTEGER;
     newRentalDate   DATE;
+    dateToChange    DATE
 
     BEFORE EACH ROW IS
     BEGIN
         newRentalNum := :new.rental_num;
         newRentalDate:= :new.start_date;
+        /*
+        SELECT MAX(start_date)
+        INTO dateToChange
+        FROM Lease_Agreement
+        WHERE rental_num = newRentalNum
+            AND start_date < newRentalDate;
+        */
     END BEFORE EACH ROW;
 
     AFTER STATEMENT IS
