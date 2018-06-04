@@ -232,7 +232,6 @@ echo '
                 $sql_main = $_POST["oplist"];
                 //Initiliaze variable to prevent error
                 $numCol = 0;
-                //Choose Table operations
                 if($sql_main == "op1") {
                     // query 1 not working
                     $bId = $_POST["bId"];
@@ -249,7 +248,7 @@ echo '
                             )
                         ) 
                         AND Rental_Property.empId = Employee.empId
-                        AND status = 1
+                        AND status = 'available'
                     ";
                     $query = oci_parse($conn,$sql);
                     oci_execute($query);
@@ -289,9 +288,9 @@ echo '
                     $numCol = oci_num_fields($query);
                 } else if ($sql_main == "op5") {
                     $sql = "
-                        SELECT COUNT(*)
+                        SELECT COUNT(*) AS Available_Properties
                         FROM Rental_Property
-                        WHERE status = 1
+                        WHERE status = 'available'
                     ";
                     $query = oci_parse($conn,$sql);
                     oci_execute($query);
@@ -300,8 +299,8 @@ echo '
                     $rPhone = $_POST["rWPhone"];
                     $sql = "
                         SELECT * 
-                        FROM Lease_Agreement
-                        WHERE renter_wphone = $rPhone
+                        FROM Lease_Agreement, Renter
+                        WHERE renter_wphone = work_phone AND work_phone = $rPhone
                     ";
                     $query = oci_parse($conn,$sql);
                     oci_execute($query);
@@ -323,7 +322,7 @@ echo '
                 } else if ($sql_main == "op9") {
                     $city = $_POST["pCity"];
                     $sql = "
-                        SELECT AVG(monthly_rent)
+                        SELECT AVG(monthly_rent) AS Average_Rent
                         FROM Rental_Property
                         WHERE city = '$city' AND status = 1
                     ";
