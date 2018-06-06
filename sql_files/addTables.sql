@@ -75,5 +75,5 @@ CREATE TABLE Lease_Agreement (
     PRIMARY KEY (rental_num,start_date),
     Foreign Key (rental_num) references Rental_Property (rental_num),
     Foreign Key (renter_wphone) references Renter (work_phone),
-    CHECK ((end_date - start_date) BETWEEN 180 and 366)
+    CHECK (MONTHS_BETWEEN(end_date,start_date) BETWEEN 6 and 12)
 );
