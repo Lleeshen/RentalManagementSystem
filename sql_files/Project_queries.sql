@@ -4,7 +4,7 @@ SELECT rental_num, Street, City, Zip, name
 FROM Rental_Property, Employee
 WHERE Rental_Property.empId IN (Select empId From Supervisor
 Where managerId = (Select empid from Manager
-where branchId = 'b1111')) --put what user inputted here 
+where branchId = (insert user input from form)) --put what user inputted here 
 AND Rental_Property.empId = Employee.empId
 AND status = 'available';
 
@@ -18,15 +18,15 @@ WHERE Supervisor.empId = Rental_Property.empId;
 listed in a happyRenter’s branch*/ 
 SELECT rental_num, Street, City, Zip 
 FROM Rental_Property 
-WHERE owner_phone = '7682229997';
+WHERE owner_phone = (user input from form);
 
 /*4) Show  a  listing  of  properties  available,  where  the  
 properties  should  satisfy  the  criteria (city, no of rooms 
 and/or range for rent given as input). */
 SELECT rental_num, start_date_of_availibility
 FROM Rental_Property
-WHERE city = 'SJ' AND num_rooms = 3 --user input
-AND monthly_rent < 500 AND monthly_rent > 300; -- min and max rent
+WHERE city = (user) AND num_rooms = (user) --user input
+AND monthly_rent < (user) AND monthly_rent > (user input); -- min and max rent
 
 /*5) Show the number of properties available for rent. */ 
 SELECT count(*) AS Available_Property
@@ -39,22 +39,25 @@ input  via  a  Graphical  User  interface  (See  section  2.1)
 or  from  the command line. */
 
 /*7) Show a lease agreement for a renter.*/ 
-SELECT * FROM Lease_Agreement, Renter
+SELECT name, work_phone, rental_num, start_date, end_date,
+	deposit_amt, rent_amt, sup_name
+FROM Lease_Agreement, Renter
 WHERE renter_wphone = work_phone AND
-renter_wphone = '5449008721';
+renter_wphone = (user input);
 
 /*8) Show the renters who rented more than one rental property.*/
 SELECT * FROM Renter 
 WHERE work_phone IN (Select distinct renter_wphone 
 	from Lease_Agreement
 	group by renter_wphone having count(*) > 1);
+				
 /*9) Show  the  average  rent  for  properties  in  a  town  
 (name of  the  town  is  entered  as  input). You can take the
  average of all the properties that are rented out (in that 
  town) and those available for rent in that town. */
  SELECT Avg(monthly_rent) AS Average_Rent
  FROM Rental_Property 
- WHERE City = 'BKNY' AND status = 'available'; 
+ WHERE City = (user input) AND status = 'available'; 
 
  /*10) Show the names and addresses of properties whose leases 
  will expire in next two months (from the current date). */
