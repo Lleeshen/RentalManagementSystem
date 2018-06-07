@@ -49,14 +49,16 @@ window.onload = formCheck;
                 Are you a new property owner, or a new renter? Choose the option to get registered. <br />
                 Are you already an owner or renter? There is also an option to create an agreement.
             </p>
+            <!-- Dropdown menu to insert -->
             <div class="dropdown">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                     Choose item to insert
                 </button>
                 <div class="dropdown-menu">
-                    <!-- Will need links to forms to insert only those things -->
+                    <!-- Links for insertion -->
                     <a class="dropdown-item" href="InsertPropOwner">Get registered as property owner</a>
                     <a class="dropdown-item" href="InsertRenter">Get registered as renter</a>
+                    <!-- Link to insert Lease Agreement -->
                     <a class="dropdown-item" href="InsertLeaseAgreement">Make a lease agreement</a>
                 </div>
             </div>
@@ -65,10 +67,12 @@ window.onload = formCheck;
                 Want information about properties?
                 Choose your desired operation.
             </p>
-            <!-- Links to this page -->
+            <!-- Form links to this page to display table;
+                formCheck() allows differnt operations to take different input fields -->
             <form method="post" onclick="formCheck();" action="#">
                 <div class="form-group">
                     <label for="action"> Select operation </label>
+                    <!-- Select dropdown menu for operatoin; When choosing operations, that item remains selected -->
                     <select class="form-control" id="action" name="oplist">
                         <option id="op1" value="op1"
 ';
@@ -135,6 +139,7 @@ echo '
                         > Show Lease Agreements expiring in the next 2 months </option>
                     </select>
                 </div>
+                <!-- Operation 1 requires BranchId; Keep value in form after submission-->
                 <div id="forOp1" class="form-group notAllOp">
                     <label for="bId"> Branch Id </label>
                     <input type="text" class="form-control" id="bId" name="bId"
@@ -144,6 +149,7 @@ if(!empty($_POST) && isset($_POST["oPhone"])) {
 }
 echo '              />
                 </div>
+                <!-- Operation 2 requires Property Owner phone; Keep value in form after submission  -->
                 <div id="forOp3" class="form-group notAllOp">
                     <label for="oPhone"> Owner\'s phone </label>
                     <input type="text" class="form-control" id="oPhone" name="oPhone" 
@@ -154,6 +160,7 @@ if(!empty($_POST) && isset($_POST["oPhone"])) {
 echo'
                         />
                 </div>
+                <!-- Operation 4 requires Property City, Number of rooms, min rent and max rent; Keep those values in form-->
                 <div id="forOp4" class="notAllOp">
                     <div class="form-group">
                         <label for="pCity"> City </label>
@@ -196,6 +203,7 @@ echo '
                         />
                     </div>
                 </div>
+                <!-- Operation 7 requires Renter Work phone, keep value in form -->
                 <div id="forOp7" class="form-group notAllOp">
                     <label for="rWPhone"> Renter\'s Work Phone </label>
                     <input type="text" class="form-control" id="rWPhone" name="rWPhone"
@@ -206,16 +214,18 @@ if(!empty($_POST) && isset($_POST["rWPhone"])) {
 echo '
                         />
                 </div>
+                <!-- Operation 9 requires Property City, keep value in form -->
                 <div id="forOp9" class="form-group notAllOp">
                     <label for="pCity"> City </label>
-                    <input type="text" class="form-control" id="pCity" name="pCity"
+                    <input type="text" class="form-control" id="pCity1" name="pCity1"
 ';
-    if(!empty($_POST) && isset($_POST["pCity"])) {
-        echo "value = $_POST[pCity]";
+    if(!empty($_POST) && isset($_POST["pCity1"])) {
+        echo "value = $_POST[pCity1]";
     }
 echo '
                     />
                 </div>
+                <!-- Submit values -->
                 <button type="submit" class="btn btn-primary">Do this action! </button>
             </form>
         </div>
@@ -229,12 +239,14 @@ echo '
                 exit;
             }
             if(!empty($_POST)) {
+                //Get which operation was chosen
                 $sql_main = $_POST["oplist"];
                 //Initiliaze variable to prevent error
                 $numCol = 0;
                 if($sql_main == "op1") {
-                    // query 1 not working
+                    //Get branchId
                     $bId = $_POST["bId"];
+                    //Query
                     $sql = "
                         SELECT rental_num, Street, City, Zip, name
                         FROM Rental_Property, Employee
@@ -250,62 +262,77 @@ echo '
                         AND Rental_Property.empId = Employee.empId
                         AND status = 'available'
                     ";
+                    //Execute and get number of columns
                     $query = oci_parse($conn,$sql);
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
                 } else  if ($sql_main == "op2") {
+                    //Query
                     $sql = "
                         SELECT Supervisor.empId, rental_num, Street, City, Zip
                         FROM Rental_Property, Supervisor
                         WHERE Supervisor.empId = Rental_Property.empId
                     ";
                     $query = oci_parse($conn,$sql);
+                    //Execute and get number of columns
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
                 } else if ($sql_main == "op3") {
+                    //Query
                     $oPhone = $_POST["oPhone"];
                     $sql = "
                         SELECT rental_num, Street, City, Zip 
                         FROM Rental_Property 
                         WHERE owner_phone = $oPhone
-                    ";
+                        ";
+                    //Execute and get number of columns
                     $query = oci_parse($conn,$sql);
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
                 } else if ($sql_main == "op4") {
+                    //Get inputs
                     $pCity = $_POST["pCity"];
                     $pRooms = $_POST["pRooms"];
                     $minRent = $_POST["pMinRent"];
                     $maxRent = $_POST["pMaxRent"];
+                    //Query
                     $sql = "
                         SELECT rental_num, start_date_of_availibility
                         FROM Rental_Property
                         WHERE city = '$pCity' AND num_rooms = $pRooms
                         AND monthly_rent < ' $maxRent' AND monthly_rent > $minRent
-                    ";
+                        ";
                     $query = oci_parse($conn,$sql);
+                    //Execute and get number of columns
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
                 } else if ($sql_main == "op5") {
+                    //Query
                     $sql = "
                         SELECT COUNT(*) AS Available_Properties
                         FROM Rental_Property
                         WHERE status = 'available'
                     ";
                     $query = oci_parse($conn,$sql);
+                    //Execute and get number of columns
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
                 } else if ($sql_main == "op7") {
+                    //Get inputs
                     $rPhone = $_POST["rWPhone"];
+                    //Query
                     $sql = "
-                        SELECT * 
+                        SELECT name, work_phone, rental_num, start_date, end_date,
+                            deposit_amt, rent_amt, sup_name
                         FROM Lease_Agreement, Renter
                         WHERE renter_wphone = work_phone AND work_phone = $rPhone
                     ";
+                    //Execute and get number of columsns
                     $query = oci_parse($conn,$sql);
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
                 } else if ($sql_main == "op8") {
+                    //Query
                     $sql = "
                         SELECT *
                         FROM Renter
@@ -317,19 +344,24 @@ echo '
                         )
                     ";
                     $query = oci_parse($conn,$sql);
+                    //Execute and get numbre of columns
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
                 } else if ($sql_main == "op9") {
-                    $city = $_POST["pCity"];
+                    //Get inputs
+                    $city = $_POST["pCity1"];
+                    //Query
                     $sql = "
                         SELECT AVG(monthly_rent) AS Average_Rent
                         FROM Rental_Property
-                        WHERE city = '$city' AND status = 1
+                        WHERE city = '$city' AND status = 'available'
                     ";
                     $query = oci_parse($conn,$sql);
+                    //Execute and get number of columns
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
                 } else if ($sql_main == "op10") {
+                    //Query
                     $sql = "
                         SELECT Rental_Property.rental_num, Street, City, Zip, end_date
                         FROM Rental_Property, Lease_Agreement
@@ -338,15 +370,17 @@ echo '
                         AND end_date >= trunc(SYSDATE)
                     ";
                     $query = oci_parse($conn,$sql);
+                    //Execute and get number of columns
                     oci_execute($query);
                     $numCol = oci_num_fields($query);
                 }
-                //Display Table
+                //Display result in table
                 echo '<div class="container">';
                 echo '<table class="table">';
                 echo '<thead class="thead-light">';
                     echo '<tr>';
                     for($i = 1; $i <= $numCol; $i++) {
+                        //Show Attribute names
                         $colName = oci_field_name($query,$i);
                         echo "<th> $colName </th>";
                     }
@@ -354,6 +388,7 @@ echo '
                 echo '</thead>';
                 echo '<tbody>';
                     while(oci_fetch($query)) {
+                        //Put each tuple in a table row
                         echo '<tr>';
                         for($i = 1; $i <= $numCol; $i++) {
                             $colValue = oci_result($query,$i);
