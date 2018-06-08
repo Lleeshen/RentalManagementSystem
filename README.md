@@ -13,6 +13,6 @@ Note: The lease agreement form operates under the assumption that appropriate pr
 
 As a precaution to ensure the accuracy and integrity of our data, we enforced the following constraints to prevent users from randomly input data: Lease agreements must be made for a minimum of 6 months and a maximum of a year. We made sure to update our records and change the status of a property to "leased" once a lease agreement for that property has been made. A rental property is removed from a supervisor's list of rental properties once the owner decides not to rent the property out anymore. The rent of a property is increased by 10% with every new lease on the same property.
 
-We used HTML to create the web page and PHP to link our webpage to our Oracle database. An active and running web application as of 6/7/28 is found at: http://www.linux.students.scu.edu/~lshen/RentalManagementSystem
+We used HTML to create the web page and PHP to link our webpage to our Oracle database. An active and running web application as of 6/7/18 is found at: http://www.linux.students.scu.edu/~lshen/RentalManagementSystem
 
 Thank you for reading until the end of our README! :)
